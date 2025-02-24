@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using TastyRecipes.Data;
+using TastyRecipes.Models;
 using TastyRecipes.Models.Recipes;
 
 namespace TastyRecipes.Controllers.Admin.RecipesAdmin
@@ -39,6 +41,8 @@ namespace TastyRecipes.Controllers.Admin.RecipesAdmin
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [ActionName("Create")]
+        [AcceptVerbs("HttpVerbs.Post")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("MealsId,MealsName")] Meals meals)
         {
@@ -48,6 +52,7 @@ namespace TastyRecipes.Controllers.Admin.RecipesAdmin
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ModelState.AddModelError("", "Please check field");
             return View(meals);
         }
 

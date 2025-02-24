@@ -7,7 +7,7 @@ namespace TastyRecipes.Models.Recipes
         public int Id { get; set; }
         [Required]
         public string Name { get; set; }
-        public virtual ICollection<Recipes> Recipes { get; set; }
+        public virtual ICollection<Recipes>? Recipes { get; set; }
 
     }
 }

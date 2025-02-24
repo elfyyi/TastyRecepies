@@ -6,10 +6,11 @@ namespace TastyRecipes.Models.Recipes
     {
        
         public int MealsId { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Please enter Meal name")]
         [MaxLength(50)]
+        [DataType(DataType.Text)]
         public string MealsName { get; set;}
-        public virtual ICollection<Recipes> Recipes { get; set; }
+        public virtual ICollection<Recipes>? Recipes { get; set; }
 
     }
 }
